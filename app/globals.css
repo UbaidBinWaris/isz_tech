@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/*
+ * Tokens are lifted from the printed business card: black leather, matte black
+ * stock, and gold foil. Every colour on the site resolves to one of these.
+ */
+:root {
+  color-scheme: dark;
+
+  --background: #0a0a0b; /* the leather the card sits on */
+  --foreground: #efe7d6; /* ivory, for running text */
+  --card: #141416; /* matte card stock */
+  --card-foreground: #efe7d6;
+  --muted: #1b1a18;
+  --muted-foreground: #a89f8a;
+  --border: #2b2822;
+  --primary: #c9a24e;
+  --primary-foreground: #15110a;
+  --ring: #ecd08a;
+
+  --gold-deep: #8c6b2c;
+  --gold: #c9a24e;
+  --gold-bright: #ecd08a;
+
+  /* Foil is never one flat colour: it bands light and dark as it catches light. */
+  --foil: linear-gradient(
+    105deg,
+    #a8813a 0%,
+    #e6c97f 22%,
+    #c9a24e 45%,
+    #f1dda0 62%,
+    #b8903f 82%,
+    #d9b964 100%
+  );
+
+  /*
+   * Pebbled leather grain, generated in SVG so there is no image to download.
+   * Specular (not diffuse) lighting: only the raised grain catches light, so the
+   * flat leather stays black instead of turning into a grey haze.
+   */
+  --leather: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='l' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.075' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeSpecularLighting surfaceScale='2' specularConstant='.8' specularExponent='38' lighting-color='%23fff'%3E%3CfeDistantLight azimuth='225' elevation='50'/%3E%3C/feSpecularLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23l)'/%3E%3C/svg%3E");
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-ring: var(--ring);
+  --color-gold-deep: var(--gold-deep);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+
+  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
+
+  /* One pass of light across the foil. Used once, on page load, by the hero card. */
+  --animate-sheen: sheen 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.4s both;
+
+  @keyframes sheen {
+    from {
+      transform: translateX(-130%) skewX(-18deg);
+    }
+    to {
+      transform: translateX(230%) skewX(-18deg);
+    }
+  }
+}
+
+/* Gold foil as text fill. Reserve for display type; never for body copy. */
+@utility text-foil {
+  background-image: var(--foil);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gold foil as a surface (primary buttons, small marks). */
+@utility bg-foil {
+  background-image: var(--foil);
+}
+
+/* Gold foil as a border. Needs a border width from a `border*` class. */
+@utility border-foil {
+  border-style: solid;
+  border-image: var(--foil) 1;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Anchor targets clear the sticky header. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* The leather: fixed behind everything, so sections scroll over one surface. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--leather);
+  opacity: 0.12;
+  /* Lit from above and falling away at the edges, like the photograph of the card. */
+  mask-image: radial-gradient(130% 100% at 50% 25%, #000 20%, transparent 100%);
+}
+
+::selection {
+  background-color: var(--gold);
+  color: var(--primary-foreground);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (forced-colors: active) {
+  .text-foil {
+    background-image: none;
+    color: CanvasText;
+    -webkit-text-fill-color: currentColor;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
