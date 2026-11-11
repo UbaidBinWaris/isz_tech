@@ -1,7 +1,8 @@
 import { FoilFrame } from "@/components/brand/FoilFrame";
+import { Quote } from "@/components/brand/Quote";
 import { Section } from "@/components/layout/Section";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { FOUNDER, MAILTO, PHONES, SITE } from "@/lib/site";
+import { MAILTO, PHONES, QUOTES, SECTIONS, SITE } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /* Hairlines sit between rows only; the frame already closes the top and bottom. */
@@ -19,8 +20,8 @@ export function Contact(): React.JSX.Element {
   return (
     <Section
       id="contact"
-      title="Start with a conversation"
-      lead="Tell us what is slowing you down. Call either number or send an email."
+      title={SECTIONS.contact.title}
+      lead={SECTIONS.contact.lead}
       className="border-t border-border/60"
     >
       <div className="max-w-4xl bg-card">
@@ -56,15 +57,13 @@ export function Contact(): React.JSX.Element {
             </dl>
 
             <div className="flex flex-col gap-4 border-t border-gold/25 pt-8 md:col-span-5 md:justify-center md:border-l md:border-t-0 md:pl-8 md:pt-0">
+              <Quote className="mb-4 text-xl md:text-2xl">{QUOTES.contact}</Quote>
               <ButtonLink href={MAILTO} className="w-full">
                 Email {SITE.shortName}
               </ButtonLink>
               <ButtonLink variant="outline" href={SITE.vcardPath} download className="w-full">
                 Save contact card
               </ButtonLink>
-              <p className={LABEL}>
-                The contact card adds {FOUNDER.name}, both numbers and the email to your phone.
-              </p>
             </div>
           </div>
         </FoilFrame>

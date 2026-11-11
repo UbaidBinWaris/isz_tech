@@ -1,5 +1,5 @@
 import { Section } from "@/components/layout/Section";
-import { APPROACH } from "@/lib/site";
+import { APPROACH, SECTIONS } from "@/lib/site";
 
 /**
  * The engagement as a numbered sequence on one rail: across the top from lg up,
@@ -9,8 +9,8 @@ export function Approach(): React.JSX.Element {
   return (
     <Section
       id="approach"
-      title="How an engagement runs"
-      lead="The same four steps every time, so you always know what happens next."
+      title={SECTIONS.approach.title}
+      lead={SECTIONS.approach.lead}
       className="border-t border-border/60"
     >
       {/*

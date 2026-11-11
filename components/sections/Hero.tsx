@@ -1,8 +1,9 @@
+import { Quote } from "@/components/brand/Quote";
 import { BusinessCard } from "@/components/sections/BusinessCard";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { SITE } from "@/lib/site";
+import { QUOTES, SITE } from "@/lib/site";
 
-/** The hero is the business card itself, with one line of context and the two things to do next. */
+/** The hero is the business card itself, with one quoted line and the two things to do next. */
 export function Hero(): React.JSX.Element {
   return (
     <section id="top" aria-labelledby="hero-title" className="px-6 pt-12 pb-16 md:pb-24">
@@ -11,9 +12,7 @@ export function Hero(): React.JSX.Element {
           <BusinessCard />
         </div>
 
-        <p className="mt-8 max-w-xl text-center text-lg leading-relaxed text-pretty text-muted-foreground">
-          {SITE.tagline}
-        </p>
+        <Quote className="mt-8 max-w-xl text-center">{QUOTES.hero}</Quote>
 
         <div className="mt-8 flex w-full flex-col gap-4 sm:w-auto sm:flex-row">
           <ButtonLink href="#contact">Request a consultation</ButtonLink>

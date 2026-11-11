@@ -1,22 +1,12 @@
 import { FoilRule } from "@/components/brand/FoilRule";
+import { Quote } from "@/components/brand/Quote";
 import { Section } from "@/components/layout/Section";
-import { FOUNDER, SITE } from "@/lib/site";
+import { COMMITMENTS, FOUNDER, QUOTES, SECTIONS } from "@/lib/site";
 
-interface Commitment {
-  term: string;
-  detail: string;
-}
-
-const COMMITMENTS: Commitment[] = [
-  { term: "Plain language", detail: "Recommendations you can act on without a glossary." },
-  { term: "One point of contact", detail: "The person who scopes your project stays on it." },
-  { term: "Written handover", detail: "Every job ends with documentation your team keeps." },
-];
-
-/** The lower half of the card, unfolded: the founder's nameplate and what working with him means. */
+/** The lower half of the card, unfolded: the founder's nameplate, his words, and what to expect. */
 export function Founder(): React.JSX.Element {
   return (
-    <Section id="founder" title="Led by its founder" className="border-t border-border/60">
+    <Section id="founder" title={SECTIONS.founder.title} className="border-t border-border/60">
       <div className="grid gap-8 md:grid-cols-12">
         {/* The same lockup as the card: role above, name in the sans. Kept smaller than the section heading. */}
         <div className="md:col-span-5">
@@ -29,11 +19,9 @@ export function Founder(): React.JSX.Element {
 
         {/* One measure for the column, so the list's hairlines end where the paragraph does. */}
         <div className="max-w-2xl md:col-span-7">
-          <p className="max-w-prose text-lg leading-relaxed text-foreground">
-            {FOUNDER.name} founded {SITE.name} and runs it as CEO. The phone numbers on this page are
-            his. When you call, you are talking to the person accountable for the work, from the
-            first conversation to the handover.
-          </p>
+          <Quote cite={`${FOUNDER.name}, ${FOUNDER.role}`}>{QUOTES.founder}</Quote>
+
+          <p className="mt-8 max-w-prose text-lg leading-relaxed text-foreground">{FOUNDER.bio}</p>
 
           <dl className="mt-8">
             {COMMITMENTS.map(({ term, detail }) => (

@@ -1,14 +1,10 @@
 import { Section } from "@/components/layout/Section";
-import { SERVICES } from "@/lib/site";
+import { SECTIONS, SERVICES } from "@/lib/site";
 
 /** The four services as a ruled ledger: the name on the left, what it covers on the right. */
 export function Services(): React.JSX.Element {
   return (
-    <Section
-      id="services"
-      title="What we do"
-      lead="Four services, the same four printed on our card. Take one, or all of them together."
-    >
+    <Section id="services" title={SECTIONS.services.title} lead={SECTIONS.services.lead}>
       {/* role="list" keeps the list semantics Safari drops once list-style is none. */}
       <ul role="list" className="border-b border-gold/25">
         {SERVICES.map((service) => (

@@ -7,6 +7,8 @@ import "./globals.css";
 const display = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
+  // Italic is used for the pull quotes.
+  style: ["normal", "italic"],
   display: "swap",
 });
 

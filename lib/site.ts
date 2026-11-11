@@ -1,7 +1,7 @@
 /**
- * Single source of truth for everything the page says.
+ * Single source of truth for everything the page says. Edit wording here.
  * Facts (name, founder, phones, email, the four services) come straight from
- * the business card. Descriptive copy is draft wording to be confirmed.
+ * the business card. Descriptive copy and quotes are draft wording to confirm.
  */
 
 export interface Phone {
@@ -25,6 +25,11 @@ export interface ApproachStep {
   detail: string;
 }
 
+export interface Commitment {
+  term: string;
+  detail: string;
+}
+
 export interface NavItem {
   label: string;
   href: string;
@@ -34,19 +39,50 @@ export const SITE = {
   name: "ISZ Tech Consulting",
   shortName: "ISZ Tech",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://iszsolution.com",
-  tagline:
-    "IT consulting, cyber security, support and solutions for businesses in Saudi Arabia and the UAE.",
   description:
     "ISZ Tech Consulting provides IT consulting, cyber security services, IT support and IT solutions for businesses in Saudi Arabia and the UAE.",
   email: "info@iszsolution.com",
   vcardPath: "/zohaib-idrees.vcf",
 } as const;
 
+/** Pull quotes. Rendered inside quotation marks, so do not type the marks here. */
+export const QUOTES = {
+  hero: "Secure, reliable IT for businesses across Saudi Arabia and the UAE.",
+  founder:
+    "Good IT is the kind you never have to think about: secure, dependable and ready when you need it.",
+  contact: "The best IT partnerships start with a simple conversation.",
+} as const;
+
+/** Section headings and the line under each. */
+export const SECTIONS = {
+  services: {
+    title: "Our services",
+    lead: "Four core services. Take one on its own, or all four together.",
+  },
+  approach: {
+    title: "How we work",
+    lead: "A clear process, from the first conversation to ongoing support.",
+  },
+  founder: {
+    title: "Meet the founder",
+  },
+  contact: {
+    title: "Get in touch",
+    lead: "Call or email to discuss what your business needs.",
+  },
+} as const;
+
 export const FOUNDER = {
   name: "Zohaib Idrees",
   role: "CEO & Founder",
-  initials: "ZI",
+  bio: "Zohaib Idrees is the founder and CEO of ISZ Tech Consulting. He started the company to give businesses in Saudi Arabia and the UAE straightforward IT advice, strong security and dependable support.",
 } as const;
+
+export const COMMITMENTS: Commitment[] = [
+  { term: "Clear communication", detail: "Straightforward advice in plain language." },
+  { term: "One point of contact", detail: "A single person accountable for your project." },
+  { term: "Documented handover", detail: "Every project ends with clear documentation for your team." },
+];
 
 export const PHONES: Phone[] = [
   { country: "Saudi Arabia", display: "+966 59 635 4725", e164: "+966596354725" },
@@ -65,18 +101,17 @@ export const SERVICES: Service[] = [
   {
     id: "it-consulting",
     name: "IT Consulting",
-    summary:
-      "A clear plan for your technology: what to keep, what to replace, and what it will cost.",
+    summary: "Clear, practical advice on the technology your business needs, and a plan to get there.",
     includes: [
-      "Audit of your current systems",
-      "Roadmap and budget for the next 12 months",
-      "Review of vendors and licences",
+      "IT assessment and audit",
+      "Technology roadmap and budgeting",
+      "Vendor and licence review",
     ],
   },
   {
     id: "cyber-security",
     name: "Cyber Security Services",
-    summary: "Find the weak points before someone else does, then close them.",
+    summary: "Protection for your data, systems and people against modern threats.",
     includes: [
       "Security assessment and testing",
       "Firewall, endpoint and email protection",
@@ -86,19 +121,17 @@ export const SERVICES: Service[] = [
   {
     id: "it-support",
     name: "IT Support",
-    summary:
-      "Someone who answers when things stop working, and the upkeep that stops it happening twice.",
+    summary: "Fast, dependable help whenever your team needs it.",
     includes: [
       "Remote and on-site helpdesk",
       "Monitoring, patching and maintenance",
-      "Setup for new staff and devices",
+      "User and device setup",
     ],
   },
   {
     id: "it-solutions",
     name: "IT Solutions",
-    summary:
-      "Networks, servers, cloud and software installed properly and handed over documented.",
+    summary: "Networks, servers and cloud systems designed, installed and fully documented.",
     includes: [
       "Network and Wi-Fi design and installation",
       "Cloud and email migration",
@@ -111,19 +144,19 @@ export const SERVICES: Service[] = [
 export const APPROACH: ApproachStep[] = [
   {
     name: "Assess",
-    detail: "We look at what you run today and where it is costing you time, money or risk.",
+    detail: "We review your current systems and identify the risks, gaps and costs.",
   },
   {
     name: "Plan",
-    detail: "You get a written scope with priorities, timelines and a fixed quote.",
+    detail: "You receive a written scope with priorities, timelines and a clear quote.",
   },
   {
     name: "Implement",
-    detail: "We do the work around your business hours and test it before handover.",
+    detail: "We carry out the work with minimal disruption and test it before handover.",
   },
   {
     name: "Support",
-    detail: "We stay on call, with monitoring and maintenance to keep it running.",
+    detail: "We stay available, with monitoring and maintenance to keep everything running.",
   },
 ];
 
